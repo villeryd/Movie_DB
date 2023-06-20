@@ -18,7 +18,9 @@ function SearchBar() {
     e.preventDefault();
     axios
       .get(
-        `https://api.themoviedb.org/3/search/movie?query=${he.encode(query)}`,
+        `${process.env.REACT_APP_TMDB_URL}/search/movie?query=${he.encode(
+          query
+        )}`,
         {
           headers: {
             Authorization: `Bearer ${process.env.REACT_APP_TMDB_API_TOKEN}`,
