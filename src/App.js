@@ -2,46 +2,28 @@ import "./App.css";
 import axios from "axios";
 import { useState } from "react";
 import he from "he";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Route, Routes } from "react-router-dom";
+import { Home } from "./Pages/Home";
+import { NavBar } from "./Components/Navigation";
+import { Movie } from "./Pages/Movie";
 
 function App() {
+  const [results, setResults] = useState(null);
+  const client = new QueryClient();
   return (
     <div className='App'>
-      Movie Database!!!
-      <SearchBar />
+      <QueryClientProvider client={client}>
+        <NavBar setResults={setResults} results={results} />
+        <Routes>
+          <Route
+            path='/'
+            element={<Home setResults={setResults} result={results} />}
+          ></Route>
+          <Route path='/:id' element={<Movie />}></Route>
+        </Routes>
+      </QueryClientProvider>
     </div>
-  );
-}
-
-function SearchBar() {
-  const [query, setQuery] = useState("");
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .get(
-        `https://api.themoviedb.org/3/search/movie?query=${he.encode(query)}`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_TMDB_API_TOKEN}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res.data.results);
-      });
-  };
-
-  return (
-    <>
-      <form className='form' onSubmit={handleSubmit}>
-        <input
-          className='search-bar'
-          type='text'
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button>Submit</button>
-      </form>
-    </>
   );
 }
 
