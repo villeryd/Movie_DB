@@ -6,13 +6,12 @@ import { SearchBar } from "../Components/searchBar";
 export function SearchResults(results) {
   return (
     <>
-      <br />
-
-      {results.result &&
-        (results.result.length > 0 ? (
+      {console.log(results)}
+      {results.results &&
+        (results.results.length > 0 ? (
           <>
             <Grid container spacing={2} direction='row'>
-              {results.result.map((r) => (
+              {results.results.map((r) => (
                 <Grid item xs={12} sm={6} md={3} lg={2}>
                   <MovieCard movie={r}></MovieCard>
                 </Grid>

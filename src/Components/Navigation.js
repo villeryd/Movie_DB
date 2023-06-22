@@ -8,8 +8,8 @@ import { useState } from "react";
 import { DrawerMenu } from "./Drawer";
 import { useNavigate } from "react-router-dom";
 
-export function NavBar({ setResults }) {
-  const [value, setValue] = useState("/");
+export function NavBar({ setResults, results }) {
+  const [value, setValue] = useState("");
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
@@ -33,10 +33,18 @@ export function NavBar({ setResults }) {
               <Tab value='/movies' label='Movies' />
               <Tab value='/tv' label='TV Shows' />
               <Tab value='/people' label='People' />
+              <Tab
+                value=''
+                sx={{ display: { xs: "none", sm: "none", md: "none" } }}
+              />
             </Tabs>
           )}
           <Box sx={{ marginLeft: "auto" }}>
-            <SearchBar setResults={setResults} />
+            <SearchBar
+              setResults={setResults}
+              results={results}
+              setValue={setValue}
+            />
           </Box>
         </Toolbar>
       </AppBar>

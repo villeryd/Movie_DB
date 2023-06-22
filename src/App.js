@@ -13,24 +13,27 @@ function App() {
   const [results, setResults] = useState(null);
   const client = new QueryClient();
   return (
-    <div className='App'>
+    <>
       <QueryClientProvider client={client}>
         <NavBar setResults={setResults} results={results} />
-        <Routes>
-          <Route
-            path='/'
-            element={<Home setResults={setResults} result={results} />}
-          ></Route>
-          <Route path='/movies' element={<Movie />}></Route>
-          <Route path='/tv' element={<Movie />}></Route>
-          <Route path='/people' element={<Movie />}></Route>
-          <Route
-            path='/search/results/:query'
-            element={<SearchResults />}
-          ></Route>
-        </Routes>
+        <div className='App'>
+          <Routes>
+            <Route
+              path='/'
+              element={<Home setResults={setResults} result={results} />}
+            ></Route>
+            <Route path='/:id' element={<Movie />}></Route>
+            <Route path='/movies' element={<Movie />}></Route>
+            <Route path='/tv' element={<Movie />}></Route>
+            <Route path='/people' element={<Movie />}></Route>
+            <Route
+              path='/search/results/:query'
+              element={<SearchResults results={results} />}
+            ></Route>
+          </Routes>
+        </div>
       </QueryClientProvider>
-    </div>
+    </>
   );
 }
 

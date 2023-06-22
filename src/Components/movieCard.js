@@ -8,18 +8,20 @@ import {
 } from "@mui/material";
 import { blue } from "@mui/material/colors";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 export function MovieCard({ movie }) {
+  const navigate = useNavigate();
   return (
-    <Card sx={{ height: 300 }}>
+    <Card sx={{ height: 450 }}>
       <CardMedia
-        // sx={{ height: 169, width: 300 }}
+        sx={{ objectFit: "contain" }}
         component='img'
         alt={movie.title}
-        height='150'
+        height='300'
         width='300'
         image={
           movie.backdrop_path !== null
-            ? `${process.env.REACT_APP_TMDB_IMG}/${movie.backdrop_path}`
+            ? `${process.env.REACT_APP_TMDB_IMG}/${movie.poster_path}`
             : "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"
         }
       />
@@ -31,6 +33,7 @@ export function MovieCard({ movie }) {
             maxHeight: 80,
             textOverflow: "ellipsis",
             overflow: "hidden",
+            objectFit: "contain",
             padding: 1,
           }}
         >
@@ -38,6 +41,7 @@ export function MovieCard({ movie }) {
             className='movie-title'
             variant='h6'
             sx={{ height: "75%", maxHeight: "75%" }}
+            onClick={() => navigate(`/${movie.id}`)}
           >
             {movie.original_title}
           </Typography>
