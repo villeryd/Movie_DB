@@ -1,7 +1,8 @@
 .App {
   text-align: center;
-  padding: 15px;
+  margin: 15px;
   height: 100%;
+  padding: 0px 50px;
 }
 .root {
   height: 100%;
@@ -9,4 +10,5 @@
 
 .movie-title:hover {
   color: blue;
+  cursor: pointer;
 }
