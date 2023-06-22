@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import { Home } from "./Pages/Home";
 import { NavBar } from "./Components/Navigation";
 import { Movie } from "./Pages/Movie";
+import { SearchResults } from "./Pages/SearchResults";
 
 function App() {
   const [results, setResults] = useState(null);
@@ -20,7 +21,13 @@ function App() {
             path='/'
             element={<Home setResults={setResults} result={results} />}
           ></Route>
-          <Route path='/:id' element={<Movie />}></Route>
+          <Route path='/movies' element={<Movie />}></Route>
+          <Route path='/tv' element={<Movie />}></Route>
+          <Route path='/people' element={<Movie />}></Route>
+          <Route
+            path='/search/results/:query'
+            element={<SearchResults />}
+          ></Route>
         </Routes>
       </QueryClientProvider>
     </div>

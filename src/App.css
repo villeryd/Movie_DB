@@ -9,4 +9,5 @@
 
 .movie-title:hover {
   color: blue;
+  cursor: pointer;
 }

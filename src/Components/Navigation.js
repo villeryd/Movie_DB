@@ -35,10 +35,7 @@ export function NavBar({ setResults }) {
               <Tab value='/people' label='People' />
             </Tabs>
           )}
-          <Box
-            sx={{ marginLeft: "auto" }}
-            display={{ xs: "none", sm: "block" }}
-          >
+          <Box sx={{ marginLeft: "auto" }}>
             <SearchBar setResults={setResults} />
           </Box>
         </Toolbar>
