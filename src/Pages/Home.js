@@ -15,7 +15,7 @@ export function Home() {
           <>
             <Grid container spacing={2} direction='row'>
               {results.map((r) => (
-                <Grid item xs={6} sm={4} md={3}>
+                <Grid item xs={12} sm={6} md={3} lg={2}>
                   <MovieCard movie={r}></MovieCard>
                 </Grid>
               ))}
