@@ -5,17 +5,21 @@ import he from "he";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./Pages/Home";
-import { Navbar } from "./Components/Navigation";
+import { NavBar } from "./Components/Navigation";
 import { Movie } from "./Pages/Movie";
 
 function App() {
+  const [results, setResults] = useState(null);
   const client = new QueryClient();
   return (
     <div className='App'>
       <QueryClientProvider client={client}>
-        <Navbar />
+        <NavBar setResults={setResults} results={results} />
         <Routes>
-          <Route path='/' element={<Home />}></Route>
+          <Route
+            path='/'
+            element={<Home setResults={setResults} result={results} />}
+          ></Route>
           <Route path='/:id' element={<Movie />}></Route>
         </Routes>
       </QueryClientProvider>

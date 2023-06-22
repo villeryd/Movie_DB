@@ -3,18 +3,16 @@ import { useState } from "react";
 import { MovieCard } from "../Components/movieCard";
 import { SearchBar } from "../Components/searchBar";
 
-export function Home() {
-  const [results, setResults] = useState(null);
+export function Home(results) {
   return (
     <>
-      Movie Database!!!
-      <SearchBar setResults={setResults} />
       <br />
-      {results &&
-        (results.length > 0 ? (
+
+      {results.result &&
+        (results.result.length > 0 ? (
           <>
             <Grid container spacing={2} direction='row'>
-              {results.map((r) => (
+              {results.result.map((r) => (
                 <Grid item xs={12} sm={6} md={3} lg={2}>
                   <MovieCard movie={r}></MovieCard>
                 </Grid>
