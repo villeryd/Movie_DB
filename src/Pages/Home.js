@@ -1,4 +1,6 @@
+import { Grid } from "@mui/material";
 import { useState } from "react";
+import { MovieCard } from "../Components/movieCard";
 import { SearchBar } from "../Components/searchBar";
 
 export function Home() {
@@ -10,20 +12,15 @@ export function Home() {
       <br />
       {results &&
         (results.length > 0 ? (
-          results.map((r) => (
-            <>
-              <div key={r.id}>{r.original_title}</div>
-              <img
-                key={r.backdrop_path}
-                src={
-                  r.backdrop_path == null
-                    ? "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"
-                    : `https://image.tmdb.org/t/p/w500/${r.backdrop_path}`
-                }
-                alt=''
-              />
-            </>
-          ))
+          <>
+            <Grid container spacing={2} direction='row'>
+              {results.map((r) => (
+                <Grid item xs={6} sm={4} md={3}>
+                  <MovieCard movie={r}></MovieCard>
+                </Grid>
+              ))}
+            </Grid>
+          </>
         ) : (
           <>
             <div>No results found</div>
