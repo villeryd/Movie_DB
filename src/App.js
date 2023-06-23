@@ -6,8 +6,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./Pages/Home";
 import { NavBar } from "./Components/Navigation";
-import { Movie } from "./Pages/Movie";
+import { Movie, MoviePopular } from "./Pages/Movie";
 import { SearchResults } from "./Pages/SearchResults";
+import { TVPopular } from "./Pages/TV";
+import { TVShow } from "./Pages/Movie";
+import { NotFound } from "./Pages/NotFound";
+import { Person, PeoplePopular } from "./Pages/People";
 
 function App() {
   const [results, setResults] = useState(null);
@@ -23,13 +27,17 @@ function App() {
               element={<Home setResults={setResults} result={results} />}
             ></Route>
             <Route path='/:id' element={<Movie />}></Route>
-            <Route path='/movies' element={<Movie />}></Route>
-            <Route path='/tv' element={<Movie />}></Route>
-            <Route path='/people' element={<Movie />}></Route>
+            <Route path='/movies' element={<MoviePopular />}></Route>
+            <Route path='/tv' element={<TVPopular />}></Route>
+            <Route path='/tv/:id' element={<TVShow />}></Route>
+            <Route path='/people' element={<PeoplePopular />}></Route>
+
+            <Route path='/person/:id' element={<Person />}></Route>
             <Route
               path='/search/results/:query'
               element={<SearchResults results={results} />}
             ></Route>
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </div>
       </QueryClientProvider>

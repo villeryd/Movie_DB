@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { MovieCard } from "../Components/movieCard";
 import { SearchBar } from "../Components/searchBar";
@@ -9,7 +9,7 @@ export function Home() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_TMDB_URL}/trending/movie/day`, {
+      .get(`${process.env.REACT_APP_TMDB_URL}/movie/popular`, {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_TMDB_API_TOKEN}`,
         },
@@ -22,7 +22,7 @@ export function Home() {
   return (
     results && (
       <>
-        <Typography variant='h2'>Trending Movies Today</Typography> <br />
+        {console.log(results)}
         {results.results &&
           (results.results.length > 0 ? (
             <>

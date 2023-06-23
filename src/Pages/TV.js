@@ -1,15 +1,15 @@
 import { Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { MovieCard } from "../Components/movieCard";
+import { TVCard } from "../Components/movieCard";
 import { SearchBar } from "../Components/searchBar";
 import axios from "axios";
 
-export function Home() {
+export function TVPopular() {
   const [results, setResults] = useState(null);
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_TMDB_URL}/trending/movie/day`, {
+      .get(`${process.env.REACT_APP_TMDB_URL}/tv/popular`, {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_TMDB_API_TOKEN}`,
         },
@@ -22,14 +22,14 @@ export function Home() {
   return (
     results && (
       <>
-        <Typography variant='h2'>Trending Movies Today</Typography> <br />
+        <Typography variant='h2'> Popular TV</Typography> <br />
         {results.results &&
           (results.results.length > 0 ? (
             <>
               <Grid container spacing={2} direction='row'>
                 {results.results.map((r) => (
                   <Grid item xs={12} sm={6} md={3} lg={2}>
-                    <MovieCard movie={r}></MovieCard>
+                    <TVCard movie={r}></TVCard>
                   </Grid>
                 ))}
               </Grid>

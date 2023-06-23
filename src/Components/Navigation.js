@@ -32,11 +32,13 @@ export function NavBar({ setResults, results }) {
               <Tab value='/' label='Home' />
               <Tab value='/movies' label='Movies' />
               <Tab value='/tv' label='TV Shows' />
-              <Tab value='/people' label='People' />
+
+              {/* feature to be implemented next */}
+              {/* <Tab value='/people' label='People' />
               <Tab
                 value=''
                 sx={{ display: { xs: "none", sm: "none", md: "none" } }}
-              />
+              /> */}
             </Tabs>
           )}
           <Box sx={{ marginLeft: "auto" }}>
