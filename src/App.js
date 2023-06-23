@@ -8,6 +8,8 @@ import { Home } from "./Pages/Home";
 import { NavBar } from "./Components/Navigation";
 import { Movie } from "./Pages/Movie";
 import { SearchResults } from "./Pages/SearchResults";
+import { TVPopular } from "./Pages/TV";
+import { TVShow } from "./Pages/Movie";
 
 function App() {
   const [results, setResults] = useState(null);
@@ -24,7 +26,8 @@ function App() {
             ></Route>
             <Route path='/:id' element={<Movie />}></Route>
             <Route path='/movies' element={<Movie />}></Route>
-            <Route path='/tv' element={<Movie />}></Route>
+            <Route path='/tv' element={<TVPopular />}></Route>
+            <Route path='/tv/:id' element={<TVShow />}></Route>
             <Route path='/people' element={<Movie />}></Route>
             <Route
               path='/search/results/:query'
