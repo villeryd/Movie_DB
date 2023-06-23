@@ -2,12 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 import he from "he";
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
 
-export function SearchBar({ setResults, results, setValue }) {
+export function SearchBar({ setResults }) {
   const [query, setQuery] = useState("");
-  const navigate = useNavigate();
-
+  const {} = useQuery({});
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -22,13 +20,9 @@ export function SearchBar({ setResults, results, setValue }) {
         }
       )
       .then((res) => {
-        setResults(res.data.results);
         console.log(res.data.results);
+        setResults(res.data.results);
       });
-    if (results !== null) {
-      setValue("");
-      navigate(`/search/results/${query}`);
-    }
   };
 
   return (
@@ -40,7 +34,7 @@ export function SearchBar({ setResults, results, setValue }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button>Submit</button>
+        <button>Search</button>
       </form>
     </>
   );

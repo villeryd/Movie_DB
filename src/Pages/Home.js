@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { MovieCard } from "../Components/movieCard";
 import { SearchBar } from "../Components/searchBar";
@@ -22,7 +22,7 @@ export function Home() {
   return (
     results && (
       <>
-        {console.log(results)}
+        <Typography variant='h1'>Popular Movies</Typography>
         {results.results &&
           (results.results.length > 0 ? (
             <>
