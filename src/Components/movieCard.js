@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 export function MovieCard({ movie }) {
   const navigate = useNavigate();
   return (
-    <Card sx={{ height: 450 }}>
+    <Card onClick={() => navigate(`/${movie.id}`)} sx={{ height: 450 }}>
       <CardMedia
         sx={{ objectFit: "contain" }}
         component='img'
@@ -74,7 +74,7 @@ export function MovieCard({ movie }) {
 export function TVCard({ movie }) {
   const navigate = useNavigate();
   return (
-    <Card sx={{ height: 450 }}>
+    <Card onClick={() => navigate(`/TV/${movie.id}`)} sx={{ height: 450 }}>
       <CardMedia
         sx={{ objectFit: "contain" }}
         component='img'
