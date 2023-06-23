@@ -22,7 +22,7 @@ export function TVPopular() {
   return (
     results && (
       <>
-        <Typography variant='h1'> Popular TV</Typography>
+        <Typography variant='h2'> Popular TV</Typography> <br />
         {results.results &&
           (results.results.length > 0 ? (
             <>

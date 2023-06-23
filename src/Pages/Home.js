@@ -9,7 +9,7 @@ export function Home() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_TMDB_URL}/movie/popular`, {
+      .get(`${process.env.REACT_APP_TMDB_URL}/trending/movie/day`, {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_TMDB_API_TOKEN}`,
         },
@@ -22,7 +22,7 @@ export function Home() {
   return (
     results && (
       <>
-        <Typography variant='h1'>Popular Movies</Typography>
+        <Typography variant='h2'>Trending Movies Today</Typography> <br />
         {results.results &&
           (results.results.length > 0 ? (
             <>

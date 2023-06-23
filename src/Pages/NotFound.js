@@ -37,7 +37,9 @@ export function NotFound() {
               alignContent: "center",
             }}
           >
-            <Button variant='contained'>Lets Go Home</Button>
+            <Button onClick={() => navigate("/")} variant='contained'>
+              Lets Go Home
+            </Button>
           </Box>
         </CardContent>
       </Card>

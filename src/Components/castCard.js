@@ -48,10 +48,8 @@ export function CastCard({ cast }) {
           }}
         > */}
         <Typography
-          className='movie-title'
           variant='h6'
           sx={{ height: 80, maxHeight: 80, width: 75, maxWidth: 75 }}
-          onClick={() => navigate(`/${cast.id}`)}
         >
           {cast.name}
         </Typography>

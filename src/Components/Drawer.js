@@ -48,7 +48,9 @@ export function DrawerMenu() {
               <ListItem>TV Shows</ListItem>
             </ListItemIcon>
           </ListItemButton>
-          <ListItemButton
+
+          {/* next feature to be added */}
+          {/* <ListItemButton
             onClick={() => {
               navigate("/people");
               setOpen(!open);
@@ -57,7 +59,7 @@ export function DrawerMenu() {
             <ListItemIcon>
               <ListItem>People</ListItem>
             </ListItemIcon>
-          </ListItemButton>
+          </ListItemButton> */}
         </List>
       </Drawer>
       <IconButton onClick={() => setOpen(!open)}>

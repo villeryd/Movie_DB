@@ -38,16 +38,21 @@ export function Movie({}) {
             alt={movie.title}
           ></img>
         </Box>
+        <br />
         <Box>
           <Typography variant='h3'>{movie.tagline}</Typography>
           <Typography variant='body1'>{movie.overview}</Typography>
         </Box>
+        <br />
         <Box>
+          <Typography variant='h6'>Genre</Typography>
           {movie.genres.map((genre) => (
             <Typography key={genre.id}>{genre.name}</Typography>
           ))}
         </Box>
+        <br />
         <Box>
+          <Typography variant='h6'>Cast</Typography>
           <Grid container spacing={3} sx={{ overflowX: "scroll" }}>
             {movie.credits.cast.map((c) => (
               <Grid item>
@@ -170,7 +175,7 @@ export function MoviePopular() {
   return (
     results && (
       <>
-        <Typography variant='h1'>Popular Movies</Typography>
+        <Typography variant='h2'>Popular Movies</Typography> <br />
         {results.results &&
           (results.results.length > 0 ? (
             <>
