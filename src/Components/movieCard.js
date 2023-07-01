@@ -43,7 +43,7 @@ export function MovieCard({ movie }) {
             sx={{ height: "75%", maxHeight: "75%" }}
             onClick={() => navigate(`/${movie.id}`)}
           >
-            {movie.original_title}
+            {movie.title}
           </Typography>
         </Box>
         <Box

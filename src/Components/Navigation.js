@@ -29,9 +29,17 @@ export function NavBar({ setResults, results }) {
                 navigate(`${value}`);
               }}
             >
-              <Tab value='/' label='Home' />
-              <Tab value='/movies' label='Movies' />
-              <Tab value='/tv' label='TV Shows' />
+              <Tab value='/' label='Home' onClick={() => navigate("/")} />
+              <Tab
+                value='/movies'
+                label='Movies'
+                onClick={() => navigate("/movies")}
+              />
+              <Tab
+                value='/tv'
+                label='TV Shows'
+                onClick={() => navigate("/tv")}
+              />
 
               {/* feature to be implemented next */}
               {/* <Tab value='/people' label='People' />

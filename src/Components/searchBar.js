@@ -12,9 +12,9 @@ export function SearchBar({ setResults, results, setValue }) {
     e.preventDefault();
     axios
       .get(
-        `${process.env.REACT_APP_TMDB_URL}/search/movie?query=${he.encode(
-          query
-        )}`,
+        `${
+          process.env.REACT_APP_TMDB_URL
+        }/search/movie?&language=en-US&query=${he.encode(query)}`,
         {
           headers: {
             Authorization: `Bearer ${process.env.REACT_APP_TMDB_API_TOKEN}`,
