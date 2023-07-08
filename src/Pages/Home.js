@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { MovieCard } from "../Components/movieCard";
-import { SearchBar } from "../Components/searchBar";
+
 import axios from "axios";
 
 export function Home() {

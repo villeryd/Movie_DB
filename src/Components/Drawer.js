@@ -9,7 +9,6 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SearchBar } from "./searchBar";
 
 export function DrawerMenu() {
   const [open, setOpen] = useState(false);

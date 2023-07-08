@@ -1,17 +1,7 @@
-import {
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Typography,
-  Box,
-} from "@mui/material";
-import { blue } from "@mui/material/colors";
-import dayjs from "dayjs";
-import { useNavigate } from "react-router-dom";
+import { Card, CardContent, CardMedia, Typography, Box } from "@mui/material";
+
 import he from "he";
 export function CastCard({ cast }) {
-  const navigate = useNavigate();
   return (
     <Card sx={{ height: 300, width: 100 }}>
       <CardMedia
@@ -36,24 +26,13 @@ export function CastCard({ cast }) {
           padding: 1,
         }}
       >
-        {/* <Box
-          component='div'
-          sx={{
-            height: 80,
-            maxHeight: 80,
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-            objectFit: "contain",
-            padding: 0.5,
-          }}
-        > */}
         <Typography
           variant='h6'
           sx={{ height: 80, maxHeight: 80, width: 75, maxWidth: 75 }}
         >
           {cast.name}
         </Typography>
-        {/* </Box> */}
+
         <Box
           component='div'
           sx={{

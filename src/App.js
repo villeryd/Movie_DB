@@ -1,7 +1,7 @@
 import "./App.css";
-import axios from "axios";
+
 import { useState } from "react";
-import he from "he";
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./Pages/Home";
@@ -35,7 +35,9 @@ function App() {
             <Route path='/person/:id' element={<Person />}></Route>
             <Route
               path='/search/results/:query'
-              element={<SearchResults results={results} />}
+              element={
+                <SearchResults results={results} setResults={setResults} />
+              }
             ></Route>
             <Route path='*' element={<NotFound />} />
           </Routes>

@@ -1,12 +1,5 @@
-import {
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Typography,
-  Box,
-} from "@mui/material";
-import { blue } from "@mui/material/colors";
+import { Card, CardContent, CardMedia, Typography, Box } from "@mui/material";
+
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 export function MovieCard({ movie }) {
