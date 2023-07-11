@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { MovieCard } from "../Components/movieCard";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
@@ -10,20 +10,32 @@ export function SearchResults() {
   const [loading, setLoading] = useState(false);
   const query = useParams();
   const [pageNumber, setPageNumber] = useState(1);
+  const [totalpages, setTotalPages] = useState(null);
   const [results, setResults] = useState(null);
-  console.log(query.query);
-  document.addEventListener("DOMContentLoaded", function (e) {
-    let documentHeight = document.body.scrollHeight;
-    let currentScroll = window.scrollY + window.innerHeight;
-    let modifier = 200;
-    if (currentScroll + modifier > documentHeight) {
-      pageNumber < results.total_pages
-        ? console.log("next page")
-        : console.log("end of page");
-    }
-  });
+  const [error, setError] = useState(false);
+
+  const observer = useRef();
+  const lastElement = useCallback(
+    (node) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          console.log("visible");
+          if (pageNumber < totalpages) {
+            setPageNumber(pageNumber + 1);
+          }
+        }
+      });
+      if (node) observer.current.observe(node);
+      console.log(node);
+    },
+    [loading, pageNumber]
+  );
+
   useEffect(() => {
     setLoading(true);
+    setError(false);
     axios
       .get(
         `${
@@ -38,27 +50,46 @@ export function SearchResults() {
         }
       )
       .then((res) => {
-        setResults(res.data);
+        setResults((prevRes) => {
+          return [...new Set([...prevRes.results, ...res.data])];
+        });
+        setPageNumber(res.data.page);
+        setTotalPages(res.data.total_pages);
+
         setLoading(false);
-        console.log(res.data);
+      })
+      .catch((e) => {
+        setError(e);
       });
   }, [query, pageNumber]);
 
   return (
     <>
-      {loading && <CircularProgress />}
+      {/* {loading && <CircularProgress />}
       {results && (
         <>
-          {console.log(results.results)}
           {results.results &&
             (results.results.length > 0 ? (
               <>
                 <Grid container spacing={2} direction='row'>
-                  {results.results.map((r) => (
-                    <Grid item xs={12} sm={6} md={3} lg={2}>
-                      <MovieCard movie={r}></MovieCard>
-                    </Grid>
-                  ))}
+                  {results.results.map((r, index) => {
+                    console.log(index + 1);
+                    if (results.results.length === index + 1) {
+                      return (
+                        <Grid item key={index} xs={12} sm={6} md={3} lg={2}>
+                          <div ref={lastElement}>
+                            <MovieCard key={r} movie={r}></MovieCard>
+                          </div>
+                        </Grid>
+                      );
+                    } else {
+                      return (
+                        <Grid item key={index} xs={12} sm={6} md={3} lg={2}>
+                          <MovieCard key={r} movie={r}></MovieCard>
+                        </Grid>
+                      );
+                    }
+                  })}
                 </Grid>
               </>
             ) : (
@@ -67,7 +98,7 @@ export function SearchResults() {
               </>
             ))}
         </>
-      )}
+      )} */}
     </>
   );
 }
