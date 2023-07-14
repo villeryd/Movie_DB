@@ -10,9 +10,10 @@ export function SearchResults() {
   const [loading, setLoading] = useState(false);
   const query = useParams();
   const [pageNumber, setPageNumber] = useState(1);
-  const [totalpages, setTotalPages] = useState(null);
-  const [results, setResults] = useState(null);
+  const [totalPages, setTotalPages] = useState(null);
+  const [results, setResults] = useState([]);
   const [error, setError] = useState(false);
+  const [resultsArray, setResultsArray] = useState([]);
 
   const observer = useRef();
   const lastElement = useCallback(
@@ -20,17 +21,14 @@ export function SearchResults() {
       if (loading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
+        if (entries[0].isIntersecting && pageNumber < totalPages) {
           console.log("visible");
-          if (pageNumber < totalpages) {
-            setPageNumber(pageNumber + 1);
-          }
+          setPageNumber(pageNumber + 1);
         }
       });
       if (node) observer.current.observe(node);
-      console.log(node);
     },
-    [loading, pageNumber]
+    [loading, pageNumber, totalPages]
   );
 
   useEffect(() => {
@@ -50,12 +48,9 @@ export function SearchResults() {
         }
       )
       .then((res) => {
-        setResults((prevRes) => {
-          return [...new Set([...prevRes.results, ...res.data])];
-        });
+        setResults((results) => [...results, res.data]);
         setPageNumber(res.data.page);
         setTotalPages(res.data.total_pages);
-
         setLoading(false);
       })
       .catch((e) => {
@@ -63,32 +58,35 @@ export function SearchResults() {
       });
   }, [query, pageNumber]);
 
+  console.log(results);
+
   return (
     <>
-      {/* {loading && <CircularProgress />}
-      {results && (
+      {loading && <CircularProgress />}
+      {results[pageNumber] && (
         <>
-          {results.results &&
-            (results.results.length > 0 ? (
+          {results[pageNumber].results &&
+            (results[pageNumber].results.length > 0 ? (
               <>
                 <Grid container spacing={2} direction='row'>
-                  {results.results.map((r, index) => {
-                    console.log(index + 1);
-                    if (results.results.length === index + 1) {
-                      return (
-                        <Grid item key={index} xs={12} sm={6} md={3} lg={2}>
-                          <div ref={lastElement}>
+                  {results.map((result) => {
+                    return result.results.map((r, index) => {
+                      if (result.results.length === index + 1) {
+                        return (
+                          <Grid item key={index} xs={12} sm={6} md={3} lg={2}>
+                            <div ref={lastElement}>
+                              <MovieCard key={r} movie={r}></MovieCard>
+                            </div>
+                          </Grid>
+                        );
+                      } else {
+                        return (
+                          <Grid item key={index} xs={12} sm={6} md={3} lg={2}>
                             <MovieCard key={r} movie={r}></MovieCard>
-                          </div>
-                        </Grid>
-                      );
-                    } else {
-                      return (
-                        <Grid item key={index} xs={12} sm={6} md={3} lg={2}>
-                          <MovieCard key={r} movie={r}></MovieCard>
-                        </Grid>
-                      );
-                    }
+                          </Grid>
+                        );
+                      }
+                    });
                   })}
                 </Grid>
               </>
@@ -98,7 +96,7 @@ export function SearchResults() {
               </>
             ))}
         </>
-      )} */}
+      )}
     </>
   );
 }
